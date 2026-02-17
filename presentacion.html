@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>De Operador a Orquestador — Seminario de Complejidad</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap');
+  
+  :root {
+    --r-background-color: #fff;
+    --r-main-color: #1A1C20;
+    --r-heading-color: #1A1C20;
+    --r-link-color: #1A1C20;
+  }
+  
+  .reveal {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    color: #1A1C20;
+  }
+  
+  .reveal h1, .reveal h2, .reveal h3 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 900;
+    text-transform: none;
+    letter-spacing: -0.02em;
+    color: #1A1C20;
+  }
+  
+  .reveal h1 { font-size: 2.8em; line-height: 1.05; }
+  .reveal h2 { font-size: 2em; line-height: 1.1; }
+  .reveal h3 { font-size: 1.4em; font-weight: 600; }
+  
+  .reveal p { font-size: 0.9em; line-height: 1.6; }
+  
+  .reveal .slide-number { color: #999; font-family: 'JetBrains Mono', monospace; font-size: 0.6em; }
+  
+  /* Dark slides */
+  .dark-slide { background: #1A1C20 !important; color: #E5E5E5 !important; }
+  .dark-slide h1, .dark-slide h2, .dark-slide h3 { color: #fff !important; }
+  .dark-slide .accent { color: #2DD4BF; }
+  
+  /* Accent */
+  .accent { color: #2DD4BF; }
+  .accent-bg { background: #1A1C20; color: #fff; padding: 0.2em 0.5em; display: inline-block; }
+  
+  /* Big number */
+  .big-number { font-size: 5em; font-weight: 900; line-height: 1; margin: 0; }
+  
+  /* Quote */
+  .reveal blockquote {
+    background: #f5f5f5;
+    border-left: 6px solid #1A1C20;
+    padding: 1em 1.5em;
+    margin: 1em 0;
+    font-style: italic;
+    font-size: 0.85em;
+    width: 85%;
+  }
+  
+  /* Lists */
+  .reveal ul { list-style: none; padding-left: 0; }
+  .reveal ul li { margin-bottom: 0.5em; font-size: 0.85em; }
+  .reveal ul li::before { content: "→ "; font-weight: 700; }
+  
+  /* Image styling */
+  .reveal img { border: none !important; box-shadow: 0 4px 20px rgba(0,0,0,0.1) !important; border-radius: 8px; }
+  .reveal img.no-shadow { box-shadow: none !important; }
+  .reveal img.logo { max-height: 120px; box-shadow: none !important; }
+  
+  /* Two columns */
+  .columns { display: flex; gap: 2em; align-items: center; }
+  .columns > * { flex: 1; }
+  
+  /* Tag */
+  .tag { 
+    display: inline-block; 
+    background: #1A1C20; 
+    color: #fff; 
+    padding: 0.2em 0.8em; 
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7em;
+    border-radius: 4px;
+    margin: 0.2em;
+  }
+  
+  /* Ladder */
+  .ladder { text-align: left; max-width: 700px; margin: 0 auto; }
+  .ladder-step {
+    padding: 0.8em 1.2em;
+    margin: 0.3em 0;
+    border-left: 4px solid #ddd;
+    font-size: 0.8em;
+  }
+  .ladder-step.active { border-left-color: #1A1C20; background: #f5f5f5; font-weight: 600; }
+  .ladder-step .step-num { font-family: 'JetBrains Mono', monospace; font-weight: 700; }
+  
+  /* Formula */
+  .formula {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.8em;
+    font-weight: 700;
+    text-align: center;
+    padding: 0.5em;
+    background: #f5f5f5;
+    border-radius: 8px;
+    margin: 1em auto;
+    max-width: 600px;
+  }
+
+  /* Small text */
+  .small { font-size: 0.6em; color: #999; }
+  
+  /* VS layout */
+  .vs-container { display: flex; gap: 1em; align-items: stretch; }
+  .vs-box { flex: 1; padding: 1.5em; border-radius: 8px; text-align: center; }
+  .vs-box.bad { background: #f5f5f5; }
+  .vs-box.good { background: #1A1C20; color: #fff; }
+  .vs-box h3 { margin-top: 0; }
+  
+  /* Progress bar for demo */
+  .demo-steps { text-align: left; max-width: 600px; margin: 1em auto; }
+  .demo-step { padding: 0.4em 0; font-size: 0.75em; border-bottom: 1px solid #eee; }
+  .demo-step .check { color: #2DD4BF; font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- SLIDE 1: Title -->
+<section data-background="#1A1C20">
+  <div style="text-align:center">
+    <p style="font-family:'JetBrains Mono',monospace; color:#2DD4BF; font-size:0.7em; letter-spacing:0.2em; margin-bottom:0.5em;">BUSINESS CYBORGS</p>
+    <h1 style="color:#fff; font-size:2.8em;">De Operador<br>a <span class="accent">Orquestador</span></h1>
+    <p style="color:#999; font-size:0.8em;">Seminario de Complejidad · Multiagentes</p>
+    <p style="color:#666; font-size:0.6em;">Camilo Serna Zamora · Febrero 2026</p>
+  </div>
+</section>
+
+<!-- SLIDE 2: Poll -->
+<section>
+  <h2>¿Cuántos usan<br>ChatGPT?</h2>
+  <p class="fragment" style="font-size:1.2em; margin-top:1em;">¿Cuántos sienten que solo<br><strong>rascan la superficie</strong>?</p>
+</section>
+
+<!-- SLIDE 3: Futures expected -->
+<section>
+  <h2>Futuros que esperábamos</h2>
+  <p style="font-size:4em; margin:0;">🚀</p>
+  <p>Autos voladores. Robots mayordomos. Jetsons.</p>
+</section>
+
+<!-- SLIDE 4: Futures feared -->
+<section data-background="#1A1C20">
+  <h2 style="color:#fff">Futuros que temíamos</h2>
+  <p style="font-size:4em; margin:0;">💀</p>
+  <p style="color:#E5E5E5">Skynet. Terminators. El fin del trabajo.</p>
+  <p class="small" style="color:#666">29 de agosto de 2025 — "Día del Juicio" según la película</p>
+</section>
+
+<!-- SLIDE 5: What we got -->
+<section>
+  <h2>Lo que recibimos</h2>
+  <p style="font-size:4em; margin:0;">💬</p>
+  <p>Un chat.</p>
+  <p class="fragment" style="font-size:1.2em; font-weight:700;">La pregunta no es SI van a usar IA.<br>Es si van a ser <u>relevantes</u> sin ella.</p>
+</section>
+
+<!-- SLIDE 6: 3 ideas -->
+<section data-background="#1A1C20">
+  <h2 style="color:#fff; font-size:2.4em;">3 movimientos<br>para esta transformación</h2>
+</section>
+
+<!-- SLIDE 7: Move 1 - Augmentation -->
+<section>
+  <span class="tag">MOVIMIENTO 1</span>
+  <h1 style="font-size:2.6em;">Human<br>Augmentation</h1>
+  <p>Humanos potenciados con tecnología</p>
+</section>
+
+<!-- SLIDE 8: Augmentation detail -->
+<section>
+  <h2>Tú + IA > Tú solo</h2>
+  <div class="formula">Humano + IA = Cyborg</div>
+  <ul>
+    <li>Mismo estudiante, mismo ensayo</li>
+    <li>Con ChatGPT: resultado 3x mejor</li>
+    <li>La herramienta amplifica lo que YA sabes</li>
+  </ul>
+  <p class="small">Herramientas: ChatGPT · Gemini · Claude · Copilot</p>
+</section>
+
+<!-- SLIDE 9: Move 2 - Orchestration -->
+<section data-background="#1A1C20">
+  <span class="tag" style="background:#2DD4BF; color:#1A1C20;">MOVIMIENTO 2</span>
+  <h1 style="color:#fff; font-size:2.6em;">Orchestration</h1>
+  <p style="color:#E5E5E5">Humanos dirigiendo legiones de agentes</p>
+</section>
+
+<!-- SLIDE 10: Infinite interns -->
+<section>
+  <h2>Pasantes infinitos</h2>
+  <p style="font-size:1.1em;">Ya no usas <strong>una</strong> herramienta.<br>Diriges un <strong>equipo</strong> de agentes.</p>
+  <br>
+  <div style="display:flex; justify-content:center; gap:2em; font-size:0.8em;">
+    <div style="text-align:center;">
+      <p style="font-size:2em;">🔍</p>
+      <p><strong>Agente 1</strong><br>Investigador</p>
+    </div>
+    <div style="text-align:center;">
+      <p style="font-size:2em;">📝</p>
+      <p><strong>Agente 2</strong><br>Escritor</p>
+    </div>
+    <div style="text-align:center;">
+      <p style="font-size:2em;">📊</p>
+      <p><strong>Agente 3</strong><br>Presentador</p>
+    </div>
+  </div>
+  <p class="fragment" style="margin-top:1em;">Y tú eres el <strong>director de orquesta</strong>.</p>
+</section>
+
+<!-- SLIDE 11: Antigravity Agent Manager -->
+<section>
+  <h3>Google Antigravity — Agent Manager</h3>
+  <img src="assets/antigravity-blog-full.jpg" style="max-height:450px;">
+  <p class="small">Múltiples agentes trabajando en paralelo, cada uno en su workspace</p>
+</section>
+
+<!-- SLIDE 12: Move 3 - English -->
+<section>
+  <span class="tag">MOVIMIENTO 3</span>
+  <h1 style="font-size:2em;">El lenguaje natural<br>como el mejor<br>lenguaje de programación</h1>
+  <p class="small">— Andrej Karpathy, co-fundador OpenAI</p>
+</section>
+
+<!-- SLIDE 13: Software evolution -->
+<section data-background="#1A1C20">
+  <div style="text-align:left; max-width:700px; margin:0 auto;">
+    <div style="margin-bottom:1.5em;">
+      <span style="color:#666; font-family:'JetBrains Mono',monospace; font-size:0.7em;">SOFTWARE 1.0</span>
+      <h3 style="color:#666; margin:0.2em 0;">Código escrito por humanos</h3>
+      <p style="color:#555; font-size:0.7em; margin:0;">C++, Python, Java — tú escribes cada línea</p>
+    </div>
+    <div style="margin-bottom:1.5em;">
+      <span style="color:#999; font-family:'JetBrains Mono',monospace; font-size:0.7em;">SOFTWARE 2.0</span>
+      <h3 style="color:#999; margin:0.2em 0;">Redes neuronales</h3>
+      <p style="color:#777; font-size:0.7em; margin:0;">Tú entrenas, la red ejecuta — Tesla Autopilot</p>
+    </div>
+    <div>
+      <span style="color:#2DD4BF; font-family:'JetBrains Mono',monospace; font-size:0.7em;">SOFTWARE 3.0</span>
+      <h3 style="color:#fff; margin:0.2em 0;">Prompts en lenguaje natural</h3>
+      <p style="color:#ccc; font-size:0.7em; margin:0;">Tú describes, el LLM ejecuta — inglés es el nuevo código</p>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 14: Why this matters for them -->
+<section>
+  <h2>¿Por qué les importa?</h2>
+  <br>
+  <p style="font-size:1.2em;">No necesitan saber <strong>programar</strong>.</p>
+  <p style="font-size:1.2em;">Necesitan saber <strong>pensar</strong> y <strong>comunicar</strong>.</p>
+  <br>
+  <p class="fragment">Como ingenieros industriales,<br>su ventaja es <strong>entender procesos</strong>.<br>Eso es exactamente lo que los agentes necesitan.</p>
+</section>
+
+<!-- SLIDE 15: Escalera Cyborg -->
+<section data-background="#1A1C20">
+  <h2 style="color:#fff;">La Escalera <span class="accent">Cyborg</span></h2>
+  <p style="color:#999; font-size:0.8em;">¿Dónde estás hoy?</p>
+</section>
+
+<!-- SLIDE 16: Escalera detail -->
+<section>
+  <div class="ladder">
+    <div class="ladder-step">
+      <span class="step-num">CAPA 4</span> — Agentes always-on. Tu chief of staff de IA. 24/7.
+    </div>
+    <div class="ladder-step">
+      <span class="step-num">CAPA 3</span> — Orquestación. Diriges equipos de agentes especializados.
+    </div>
+    <div class="ladder-step active">
+      <span class="step-num">CAPA 2</span> — Augmentación avanzada. Flujos, contexto, iteración.
+    </div>
+    <div class="ladder-step">
+      <span class="step-num">CAPA 1</span> — "Le pregunto cosas a ChatGPT"
+    </div>
+  </div>
+  <p style="margin-top:1.5em; font-size:0.9em;" class="fragment">La mayoría de sus compañeros están en <strong>Capa 1</strong>.<br>Hoy saltan a <strong>Capa 2-3</strong>.</p>
+</section>
+
+<!-- SLIDE 17: Delta intro -->
+<section data-background="#1A1C20">
+  <h2 style="color:#fff;">El Delta de Trabajo</h2>
+  <div class="formula" style="background:rgba(255,255,255,0.1); color:#fff;">
+    Δ = V<sub>dirigido</sub> / V<sub>autónomo</sub>
+  </div>
+</section>
+
+<!-- SLIDE 18: Delta explanation -->
+<section>
+  <h3>Tu valor se mide en Delta</h3>
+  <br>
+  <div class="vs-container">
+    <div class="vs-box bad">
+      <p style="font-size:2.5em; margin:0;">Δ ≤ 1</p>
+      <p>La IA no te necesita.<br>Prompt genérico → resultado genérico.</p>
+      <p style="font-size:0.7em; color:#999;">⚠️ Danger zone</p>
+    </div>
+    <div class="vs-box good">
+      <p style="font-size:2.5em; margin:0; color:#2DD4BF;">Δ > 1</p>
+      <p>Tú eres irremplazable.<br>Tu contexto multiplica el resultado.</p>
+      <p style="font-size:0.7em; color:#999;">✦ Donde quieres estar</p>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 19: Delta example -->
+<section>
+  <h3>Misma herramienta. Diferente Delta.</h3>
+  <br>
+  <div style="text-align:left; max-width:650px; margin:0 auto; font-size:0.85em;">
+    <div style="padding:1em; background:#f5f5f5; border-radius:8px; margin-bottom:1em;">
+      <strong>Sin dirección (Δ ≈ 1):</strong><br>
+      <span style="font-family:'JetBrains Mono',monospace; font-size:0.85em;">"Háblame del mercado laboral en Colombia"</span><br>
+      → Resultado genérico, Wikipedia glorificado
+    </div>
+    <div style="padding:1em; background:#1A1C20; color:#fff; border-radius:8px;">
+      <strong>Con dirección (Δ > 2):</strong><br>
+      <span style="font-family:'JetBrains Mono',monospace; font-size:0.85em;">"Investiga salarios de ing. industriales en Colombia 2026, por nivel de experiencia, con fuentes de Glassdoor y elempleo.com. Incluye las 10 empresas que más contratan."</span><br>
+      → Resultado accionable, con datos y fuentes
+    </div>
+  </div>
+  <p class="fragment" style="font-weight:700; margin-top:1em;">La bifurcación ya empezó.<br>No hay punto medio estable.</p>
+</section>
+
+<!-- SLIDE 20: Demo section -->
+<section data-background="#1A1C20">
+  <h2 style="color:#fff;">Demo en vivo</h2>
+  <p style="color:#999; font-size:1.1em;">Agentes autónomos en acción</p>
+</section>
+
+<!-- SLIDE 21: Manus intro -->
+<section>
+  <h2>Manus</h2>
+  <p>El agente que trabaja solo</p>
+  <img src="assets/manus-home.png" style="max-height:380px;">
+  <p class="small">manus.im — Ahora parte de Meta</p>
+</section>
+
+<!-- SLIDE 22: Manus prompt -->
+<section>
+  <h3>Le damos una tarea real</h3>
+  <img src="assets/manus-prompt.png" style="max-height:450px;">
+  <p class="small">"Investiga el mercado laboral para ingenieros industriales en Colombia en 2026..."</p>
+</section>
+
+<!-- SLIDE 23: Manus working -->
+<section>
+  <h3>Manus trabaja — autónomamente</h3>
+  <img src="assets/manus-working-1.png" style="max-height:420px;">
+  <div class="demo-steps fragment">
+    <div class="demo-step"><span class="check">✓</span> Busca en web</div>
+    <div class="demo-step"><span class="check">✓</span> Visita Poli.edu.co, Unicafam</div>
+    <div class="demo-step"><span class="check">✓</span> Guarda hallazgos</div>
+    <div class="demo-step">⟳ Sigue investigando...</div>
+  </div>
+</section>
+
+<!-- SLIDE 24: Manus results -->
+<section>
+  <h3>Resultado: tarea completada</h3>
+  <img src="assets/manus-completed.png" style="max-height:420px;">
+  <p class="small">88% empleabilidad · $3M salario inicial · 7+ sectores · Documento + web interactiva</p>
+</section>
+
+<!-- SLIDE 25: Manus takeaway -->
+<section data-background="#1A1C20">
+  <h2 style="color:#fff;">Un pasante que<br>no duerme,<br>no cobra,<br>y no se queja.</h2>
+  <p style="color:#999; font-size:0.8em;" class="fragment">Pero necesita un buen jefe. Ahí entran ustedes.</p>
+</section>
+
+<!-- SLIDE 26: Scarlett intro -->
+<section>
+  <h2>Scarlett</h2>
+  <p>El agente que <strong>nunca se apaga</strong></p>
+  <br>
+  <div style="display:flex; justify-content:center; gap:3em; align-items:center;">
+    <div style="text-align:center;">
+      <p style="font-size:3em; margin:0;">📱</p>
+      <p style="font-size:0.8em;">Vive en Telegram<br>24/7</p>
+    </div>
+    <div style="text-align:center;">
+      <p style="font-size:3em; margin:0;">🧠</p>
+      <p style="font-size:0.8em;">Memoria<br>persistente</p>
+    </div>
+    <div style="text-align:center;">
+      <p style="font-size:3em; margin:0;">📧</p>
+      <p style="font-size:0.8em;">Email, calendario,<br>archivos</p>
+    </div>
+    <div style="text-align:center;">
+      <p style="font-size:3em; margin:0;">⏰</p>
+      <p style="font-size:0.8em;">Tareas<br>programadas</p>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 27: Scarlett demo -->
+<section>
+  <h3>Demo en vivo — Telegram</h3>
+  <p style="font-size:1.1em; background:#f5f5f5; padding:1em; border-radius:8px; max-width:600px; margin:1em auto;">
+    💬 Le pido algo por Telegram...<br>
+    y responde en tiempo real.
+  </p>
+  <br>
+  <p style="font-size:0.85em;">Manus ejecuta <strong>tareas</strong>.<br>Scarlett <strong>vive</strong> contigo. Contexto acumulado.</p>
+</section>
+
+<!-- SLIDE 28: OpenClaw -->
+<section data-background="#1A1C20">
+  <h2 style="color:#fff;">¿Cómo funciona?</h2>
+  <h1 style="color:#2DD4BF; font-size:2.2em;">OpenClaw</h1>
+  <p style="color:#E5E5E5; font-size:0.9em;">Open source · Tu máquina · Tus datos</p>
+  <br>
+  <div style="display:flex; justify-content:center; gap:2em; font-size:0.7em; color:#999;">
+    <span>WhatsApp</span>
+    <span>Telegram</span>
+    <span>Discord</span>
+    <span>Signal</span>
+    <span>Slack</span>
+    <span>iMessage</span>
+  </div>
+  <br>
+  <p style="color:#999; font-size:0.75em;">Tu propio agente personal. En tu propia máquina.<br>No le estás prestando tu vida a OpenAI.</p>
+  <p style="color:#666; font-size:0.6em;">Esto es Capa 4 de la Escalera. A donde van eventualmente.</p>
+</section>
+
+<!-- SLIDE 29: Hands-on -->
+<section data-background="#1A1C20">
+  <h1 style="color:#fff; font-size:3em;">Ahora<br><span class="accent">ustedes</span>.</h1>
+</section>
+
+<!-- SLIDE 30: Setup -->
+<section>
+  <h2>Setup</h2>
+  <br>
+  <div style="text-align:left; max-width:600px; margin:0 auto; font-size:0.9em;">
+    <p><strong>1.</strong> Descargar <span style="font-family:'JetBrains Mono',monospace;">antigravity.google</span></p>
+    <p><strong>2.</strong> Login con cuenta Google</p>
+    <p><strong>3.</strong> Abrir Agent Manager</p>
+    <p><strong>4.</strong> Formar equipos de 3-4 personas</p>
+  </div>
+  <br>
+  <p class="small">Gratis · Mac / Windows / Linux · Gemini 3 Pro incluido</p>
+</section>
+
+<!-- SLIDE 31: El Reto -->
+<section>
+  <h2>El Reto</h2>
+  <p>Vamos a crear un <strong>plan de estudio personalizado</strong><br>usando 3 agentes que trabajan en equipo.</p>
+  <br>
+  <div style="text-align:left; max-width:700px; margin:0 auto; font-size:0.8em;">
+    <div style="padding:0.6em 1em; background:#f5f5f5; border-radius:6px; margin:0.4em 0;">
+      🔍 <strong>Agente 1 — Investigador:</strong> Analiza tu situación + mercado laboral
+    </div>
+    <div style="padding:0.6em 1em; background:#f5f5f5; border-radius:6px; margin:0.4em 0;">
+      📋 <strong>Agente 2 — Estratega:</strong> Diseña el plan semestre por semestre
+    </div>
+    <div style="padding:0.6em 1em; background:#f5f5f5; border-radius:6px; margin:0.4em 0;">
+      📄 <strong>Agente 3 — Recursos:</strong> Encuentra cursos, libros y crea calendario
+    </div>
+  </div>
+  <br>
+  <p class="small">Cada agente alimenta al siguiente → <strong>pipeline de agentes</strong></p>
+</section>
+
+<!-- SLIDE 31b: El Repo -->
+<section>
+  <h2>Todo está en GitHub</h2>
+  <br>
+  <div style="background:#f5f5f5; padding:1.2em; border-radius:8px; max-width:650px; margin:0 auto;">
+    <p style="font-family:'JetBrains Mono',monospace; font-size:0.75em; margin:0;">github.com/scarlettdetekelala/<br><strong>seminario-multi-agentes</strong></p>
+  </div>
+  <br>
+  <div style="text-align:left; max-width:600px; margin:0 auto; font-size:0.8em;">
+    <p>📁 <code>mi-contexto.md</code> — Editar con TU info</p>
+    <p>📁 <code>prompts/</code> — Los 3 prompts listos para copiar</p>
+    <p>📁 <code>ejemplo/</code> — Resultado completo de ejemplo</p>
+    <p>📁 <code>resultados/</code> — Aquí se guardan tus resultados</p>
+  </div>
+</section>
+
+<!-- SLIDE 31c: Paso a Paso -->
+<section>
+  <h2>Paso a Paso</h2>
+  <br>
+  <div style="text-align:left; max-width:650px; margin:0 auto; font-size:0.85em;">
+    <p><strong>1.</strong> Abrir Antigravity → File → Open Folder → <em>la carpeta del repo</em></p>
+    <p><strong>2.</strong> Editar <code>mi-contexto.md</code> con tu info real</p>
+    <p><strong>3.</strong> Abrir chat (<code>Cmd+L</code>) → pegar prompt del <strong>Agente 1</strong></p>
+    <p><strong>4.</strong> Revisar resultado → pegar prompt del <strong>Agente 2</strong></p>
+    <p><strong>5.</strong> Revisar resultado → pegar prompt del <strong>Agente 3</strong></p>
+    <p><strong>6.</strong> ¡Tienes un plan de estudio personalizado!</p>
+  </div>
+  <br>
+  <p class="small" style="color:#999;">💡 Pueden modificar los prompts. Iterar es parte del ejercicio.</p>
+</section>
+
+<!-- SLIDE 32: Rules -->
+<section data-background="#1A1C20">
+  <h2 style="color:#fff;">Reglas</h2>
+  <br>
+  <div style="text-align:left; max-width:600px; margin:0 auto; font-size:0.9em; color:#E5E5E5;">
+    <p>→ Mínimo <strong style="color:#2DD4BF;">2 agentes en paralelo</strong></p>
+    <p>→ Documentar: qué le pidieron a cada agente y <strong style="color:#2DD4BF;">por qué lo dividieron así</strong></p>
+    <p>→ Entregable concreto: slides, documento, o plan</p>
+    <p>→ <strong style="color:#2DD4BF;">Bonus:</strong> Medir su propio Δ</p>
+  </div>
+  <br>
+  <p style="color:#666; font-size:1.5em;">⏱ 60 minutos</p>
+</section>
+
+<!-- SLIDE 33: Timer placeholder -->
+<section>
+  <h1 style="font-size:6em;">⏱</h1>
+  <h2>A trabajar.</h2>
+</section>
+
+<!-- SLIDE 34: Presentations -->
+<section>
+  <h2>Presentaciones</h2>
+  <p style="font-size:0.9em;">3-4 minutos por equipo</p>
+  <br>
+  <div style="text-align:left; max-width:600px; margin:0 auto; font-size:0.85em;">
+    <p><strong>Muestren:</strong></p>
+    <p>→ Qué le pidieron a cada agente</p>
+    <p>→ Cómo orquestaron el flujo</p>
+    <p>→ El resultado</p>
+    <br>
+    <p><strong>Los demás evalúan:</strong></p>
+    <p>→ ¿Fue mejor que hacerlo solo con un chat?</p>
+  </div>
+</section>
+
+<!-- SLIDE 35: Recap -->
+<section data-background="#1A1C20">
+  <h2 style="color:#fff;">Lo que hicieron hoy</h2>
+  <br>
+  <div style="display:flex; justify-content:center; gap:1.5em; font-size:0.8em;">
+    <div style="text-align:center; color:#999; padding:1em;">
+      <p style="font-size:1.5em; color:#fff;">01</p>
+      <p style="color:#fff;"><strong>Augmentation</strong></p>
+      <p>Potenciaron su trabajo</p>
+    </div>
+    <div style="text-align:center; color:#999; padding:1em;">
+      <p style="font-size:1.5em; color:#2DD4BF;">02</p>
+      <p style="color:#2DD4BF;"><strong>Orchestration</strong></p>
+      <p>Dirigieron agentes</p>
+    </div>
+    <div style="text-align:center; color:#999; padding:1em;">
+      <p style="font-size:1.5em; color:#fff;">03</p>
+      <p style="color:#fff;"><strong>English as Code</strong></p>
+      <p>Programaron con palabras</p>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 36: Escalera recap -->
+<section>
+  <h3>Subieron en la Escalera</h3>
+  <br>
+  <div class="ladder">
+    <div class="ladder-step" style="border-left-color:#ccc;">
+      <span class="step-num">CAPA 4</span> — Always-on agents (Scarlett, OpenClaw)
+    </div>
+    <div class="ladder-step active" style="border-left-color:#2DD4BF; background:#f0fdf4;">
+      <span class="step-num">CAPA 3</span> — Orquestación (Antigravity Agent Manager) ← <strong>HOY</strong>
+    </div>
+    <div class="ladder-step active">
+      <span class="step-num">CAPA 2</span> — Augmentación avanzada ← <strong>HOY</strong>
+    </div>
+    <div class="ladder-step" style="border-left-color:#ddd; color:#999;">
+      <span class="step-num">CAPA 1</span> — "Le pregunto cosas a ChatGPT"
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 37: Delta reminder -->
+<section>
+  <h2>Su Delta depende<br>de ustedes.</h2>
+  <h2>No de la herramienta.</h2>
+</section>
+
+<!-- SLIDE 38: Bifurcation -->
+<section data-background="#1A1C20">
+  <h2 style="color:#fff;">La bifurcación<br>ya empezó.</h2>
+  <br>
+  <p style="color:#E5E5E5; font-size:1em;">Los que aprenden a orquestar<br>van para <span class="accent">arriba</span>.</p>
+  <p style="color:#666; font-size:1em;" class="fragment">Los que esperan...</p>
+</section>
+
+<!-- SLIDE 39: Best moment -->
+<section>
+  <h2>Este es el mejor momento<br>para ser un profesional<br>con ganas de aprender.</h2>
+  <p class="fragment" style="font-size:0.9em; margin-top:1.5em;">Siempre y cuando estén listos de<br>experimentar con nuevas formas de hacer las cosas.</p>
+</section>
+
+<!-- SLIDE 40: CTA -->
+<section data-background="#1A1C20">
+  <div style="text-align:center;">
+    <img src="../../skills/business-cyborgs-brand/assets/logo-black.jpg" class="no-shadow" style="max-height:100px; margin-bottom:1em; filter: brightness(0) saturate(100%) invert(72%) sepia(52%) saturate(497%) hue-rotate(127deg) brightness(95%) contrast(92%);">
+    <h2 style="color:#fff; font-size:1.8em;">Actualízate. Orquesta.<br>Conquista. <span class="accent">Gana.</span></h2>
+    <br>
+    <p style="color:#999; font-size:0.9em;">businesscyborgs.substack.com</p>
+    <br>
+    <p style="color:#666; font-size:0.7em;">Camilo Serna Zamora</p>
+  </div>
+</section>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script>
+Reveal.initialize({
+  hash: true,
+  slideNumber: true,
+  transition: 'none',
+  backgroundTransition: 'none',
+  width: 1200,
+  height: 700,
+  margin: 0.1,
+  center: true
+});
+</script>
+</body>
+</html>
