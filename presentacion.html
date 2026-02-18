@@ -202,25 +202,40 @@
   <p style="color:#E5E5E5">Humanos dirigiendo legiones de agentes</p>
 </section>
 
-<!-- SLIDE 10: Infinite interns -->
+<!-- SLIDE 10: Infinite interns - Diamond Pipeline -->
 <section>
   <h2 style="font-size:1.5em;">Pasantes infinitos</h2>
-  <p style="font-size:0.9em;">Ya no usas <strong>una</strong> herramienta.<br>Diriges un <strong>equipo</strong> de agentes — cada uno en su escritorio.</p>
-  <div style="display:flex; justify-content:center; gap:1.5em; font-size:0.7em; margin-top:0.5em;">
-    <div style="text-align:center; background:#f5f5f5; padding:0.6em 1em; border-radius:8px;">
-      <p style="font-size:2em; margin:0;">🔍</p>
-      <p style="margin:0.2em 0;"><strong>Workspace 1</strong><br>Investigador</p>
+  <p style="font-size:0.8em;">No diriges <strong>una</strong> herramienta. Diriges un <strong>pipeline</strong> de agentes especializados.</p>
+  <div style="display:flex; justify-content:center; gap:0.6em; font-size:0.6em; margin-top:0.3em; align-items:center;">
+    <!-- Phase 1 -->
+    <div style="text-align:center; background:#f5f5f5; padding:0.5em 0.7em; border-radius:8px;">
+      <p style="font-size:1.5em; margin:0;">🔍</p>
+      <p style="margin:0.2em 0; font-size:0.9em;"><strong>Fase 1</strong><br>Screener</p>
     </div>
-    <div style="text-align:center; background:#f5f5f5; padding:0.6em 1em; border-radius:8px;">
-      <p style="font-size:2em; margin:0;">📊</p>
-      <p style="margin:0.2em 0;"><strong>Workspace 2</strong><br>Analista</p>
+    <div style="font-size:1.5em;">→</div>
+    <!-- Phase 2 -->
+    <div style="text-align:center;">
+      <div style="background:#f5f5f5; padding:0.3em 0.5em; border-radius:6px; margin:0.15em 0; font-size:0.85em;">💰 Financiero</div>
+      <div style="background:#f5f5f5; padding:0.3em 0.5em; border-radius:6px; margin:0.15em 0; font-size:0.85em;">🏭 Industria</div>
+      <div style="background:#f5f5f5; padding:0.3em 0.5em; border-radius:6px; margin:0.15em 0; font-size:0.85em;">⚠️ Riesgo</div>
+      <p style="margin:0.1em 0; font-size:0.75em; color:#999;">Fase 2 · paralelo</p>
     </div>
-    <div style="text-align:center; background:#f5f5f5; padding:0.6em 1em; border-radius:8px;">
-      <p style="font-size:2em; margin:0;">📋</p>
-      <p style="margin:0.2em 0;"><strong>Workspace 3</strong><br>Diseñador</p>
+    <div style="font-size:1.5em;">→</div>
+    <!-- Phase 3 -->
+    <div style="text-align:center;">
+      <div style="background:#1A1C20; color:#fff; padding:0.3em 0.5em; border-radius:6px; margin:0.15em 0; font-size:0.85em;">👩‍💼 MD</div>
+      <div style="background:#1A1C20; color:#fff; padding:0.3em 0.5em; border-radius:6px; margin:0.15em 0; font-size:0.85em;">🛡️ Risk</div>
+      <div style="background:#1A1C20; color:#fff; padding:0.3em 0.5em; border-radius:6px; margin:0.15em 0; font-size:0.85em;">💼 Cliente</div>
+      <p style="margin:0.1em 0; font-size:0.75em; color:#999;">Fase 3 · criticos</p>
+    </div>
+    <div style="font-size:1.5em;">→</div>
+    <!-- Phase 4 -->
+    <div style="text-align:center; background:#f5f5f5; padding:0.5em 0.7em; border-radius:8px;">
+      <p style="font-size:1.5em; margin:0;">📝</p>
+      <p style="margin:0.2em 0; font-size:0.9em;"><strong>Fase 4</strong><br>Memo Final</p>
     </div>
   </div>
-  <p class="fragment" style="margin-top:0.5em; font-size:0.9em;">Corren <strong>en paralelo</strong>. Tú revisas en el Inbox.<br>Eres el <strong>director de orquesta</strong>.</p>
+  <p class="fragment" style="margin-top:0.4em; font-size:0.8em;">4 fases · 8 agentes · <strong>4 checkpoints humanos</strong>.<br>Eres el <strong>director de orquesta</strong>.</p>
 </section>
 
 <!-- SLIDE 11: Antigravity Agent Manager -->
@@ -318,24 +333,24 @@
   </div>
 </section>
 
-<!-- SLIDE 19: Delta example -->
+<!-- SLIDE 19: Delta example - IB analysis -->
 <section>
   <h3 style="font-size:1em; margin-bottom:0.1em;">Misma herramienta. Diferente Delta.</h3>
-  <div style="text-align:left; max-width:580px; margin:0 auto; font-size:0.55em;">
+  <div style="text-align:left; max-width:620px; margin:0 auto; font-size:0.55em;">
     <div style="padding:0.5em; background:#f5f5f5; border-radius:8px; margin-bottom:0.3em;">
       <strong>Δ ≈ 1 — Un solo prompt:</strong><br>
-      <span style="font-family:'JetBrains Mono',monospace; font-size:0.85em;">"Hazme un plan de estudio para ser mejor ingeniero industrial"</span><br>
-      → Genérico. Consejos de manual. No te conoce.
+      <span style="font-family:'JetBrains Mono',monospace; font-size:0.85em;">"Analiza Grupo Nutresa para inversion"</span><br>
+      → Analisis generico. Sin tesis. Sin critica. Cualquiera obtiene lo mismo.
     </div>
     <div style="padding:0.5em; background:#1A1C20; color:#fff; border-radius:8px;">
-      <strong>Δ > 2 — Tres agentes orquestados:</strong><br>
-      <span style="font-size:0.85em;">🔍 Agente 1 investiga mercado laboral para tu perfil específico<br>
-      📊 Agente 2 analiza tus fortalezas y gaps vs. lo que pide el mercado<br>
-      📋 Agente 3 arma plan semestre a semestre con cursos reales<br>
-      🧠 <strong>Tú</strong> revisas, corriges, combinas → plan accionable y personalizado</span>
+      <strong>Δ > 2 — Pipeline de 8 agentes + 4 checkpoints:</strong><br>
+      <span style="font-size:0.85em;">🔍 Screener busca datos clave → <strong>TU</strong> defines el angulo<br>
+      💰🏭⚠️ 3 analistas investigan en paralelo → <strong>TU</strong> formas la tesis<br>
+      👩‍💼🛡️💼 3 criticos desafian tu tesis → <strong>TU</strong> decides que aceptas<br>
+      📝 Integrador produce el memo → refleja <strong>TUS</strong> decisiones</span>
     </div>
   </div>
-  <p class="fragment" style="font-weight:700; margin-top:0.4em; font-size:0.85em;">La diferencia no es la IA. Es cómo la diriges.</p>
+  <p class="fragment" style="font-weight:700; margin-top:0.4em; font-size:0.85em;">Mismos agentes + diferente orquestador = diferente tesis.<br>ESO es lo que te hace irremplazable.</p>
 </section>
 
 <!-- SLIDE 20: Demo section -->
@@ -461,61 +476,110 @@
 <!-- SLIDE 31: El Reto -->
 <section>
   <h2 style="font-size:1.5em; margin-bottom:0.2em;">El Reto</h2>
-  <p style="font-size:0.8em;">Crear un <strong>plan de estudio personalizado</strong> usando 3 agentes<br>trabajando <strong>en paralelo</strong>, cada uno en su propio workspace.</p>
-  <div style="text-align:left; max-width:700px; margin:0.3em auto; font-size:0.7em;">
-    <div style="padding:0.5em 1em; background:#f5f5f5; border-radius:6px; margin:0.3em 0;">
-      🔍 <strong>Workspace 1 — Investigador:</strong> Investiga mercado laboral + tendencias para tu perfil. Genera <code>investigacion.md</code>
+  <p style="font-size:0.75em;">Crear un <strong>investment memo profesional</strong> sobre <strong>Grupo Nutresa</strong><br>usando un pipeline de <strong>8 agentes</strong> con <strong>4 checkpoints humanos</strong>.</p>
+  <div style="text-align:left; max-width:700px; margin:0.3em auto; font-size:0.65em;">
+    <div style="padding:0.4em 1em; background:#f5f5f5; border-radius:6px; margin:0.2em 0;">
+      <strong>Fase 1 — Screening:</strong> 1 agente hace barrido inicial → <strong style="color:#2DD4BF;">TU defines el angulo</strong>
     </div>
-    <div style="padding:0.5em 1em; background:#f5f5f5; border-radius:6px; margin:0.3em 0;">
-      📊 <strong>Workspace 2 — Analista:</strong> Analiza tus fortalezas y gaps vs. el mercado. Genera <code>analisis-gaps.md</code>
+    <div style="padding:0.4em 1em; background:#f5f5f5; border-radius:6px; margin:0.2em 0;">
+      <strong>Fase 2 — Deep Dive:</strong> 3 analistas en paralelo (financiero + industria + riesgo) → <strong style="color:#2DD4BF;">TU formas la tesis</strong>
     </div>
-    <div style="padding:0.5em 1em; background:#f5f5f5; border-radius:6px; margin:0.3em 0;">
-      📋 <strong>Workspace 3 — Diseñador:</strong> Arma plan de estudio semestre por semestre con recursos. Genera <code>plan-estudio.md</code>
+    <div style="padding:0.4em 1em; background:#1A1C20; color:#fff; border-radius:6px; margin:0.2em 0;">
+      <strong>Fase 3 — Comite:</strong> 3 criticos desafian tu tesis en paralelo → <strong style="color:#2DD4BF;">TU curas las criticas</strong>
+    </div>
+    <div style="padding:0.4em 1em; background:#f5f5f5; border-radius:6px; margin:0.2em 0;">
+      <strong>Fase 4 — Memo:</strong> 1 integrador produce el memo final → <strong style="color:#2DD4BF;">TU haces polish</strong>
     </div>
   </div>
-  <p class="small">3 agentes en paralelo → revisar en Inbox → iterar → combinar resultados</p>
+  <p class="small">Grupo Nutresa: BVC: NUTRESA · COP 115T market cap · Alimentos procesados · Medellin</p>
+</section>
+
+<!-- SLIDE 31-pipeline: El Pipeline visual -->
+<section data-background="#1A1C20">
+  <h2 style="color:#fff; font-size:1.3em; margin-bottom:0.3em;">El Pipeline</h2>
+  <div style="max-width:750px; margin:0 auto; font-size:0.6em; color:#E5E5E5;">
+    <!-- Phase 1 -->
+    <div style="display:flex; align-items:center; gap:0.8em; margin:0.4em 0;">
+      <span style="color:#999; font-family:'JetBrains Mono',monospace; min-width:50px;">F1</span>
+      <div style="background:rgba(255,255,255,0.1); padding:0.4em 1em; border-radius:6px; flex:1;">🔍 Screener</div>
+      <span style="color:#2DD4BF; min-width:100px;">→ screening.md</span>
+    </div>
+    <div style="text-align:center; color:#2DD4BF; font-size:0.85em; margin:0.2em 0;">CHECKPOINT: Tu angulo + preguntas clave</div>
+    <!-- Phase 2 -->
+    <div style="display:flex; align-items:center; gap:0.8em; margin:0.4em 0;">
+      <span style="color:#999; font-family:'JetBrains Mono',monospace; min-width:50px;">F2</span>
+      <div style="display:flex; gap:0.4em; flex:1;">
+        <div style="background:rgba(255,255,255,0.1); padding:0.4em 0.6em; border-radius:6px; flex:1; text-align:center;">💰 Financiero</div>
+        <div style="background:rgba(255,255,255,0.1); padding:0.4em 0.6em; border-radius:6px; flex:1; text-align:center;">🏭 Industria</div>
+        <div style="background:rgba(255,255,255,0.1); padding:0.4em 0.6em; border-radius:6px; flex:1; text-align:center;">⚠️ Riesgo</div>
+      </div>
+      <span style="color:#999; min-width:100px; font-size:0.85em;">paralelo</span>
+    </div>
+    <div style="text-align:center; color:#2DD4BF; font-size:0.85em; margin:0.2em 0;">CHECKPOINT: TU TESIS de inversion (comprar/esperar/evitar)</div>
+    <!-- Phase 3 -->
+    <div style="display:flex; align-items:center; gap:0.8em; margin:0.4em 0;">
+      <span style="color:#999; font-family:'JetBrains Mono',monospace; min-width:50px;">F3</span>
+      <div style="display:flex; gap:0.4em; flex:1;">
+        <div style="background:rgba(45,212,191,0.2); padding:0.4em 0.6em; border-radius:6px; flex:1; text-align:center;">👩‍💼 Patricia MD</div>
+        <div style="background:rgba(45,212,191,0.2); padding:0.4em 0.6em; border-radius:6px; flex:1; text-align:center;">🛡️ Santiago Risk</div>
+        <div style="background:rgba(45,212,191,0.2); padding:0.4em 0.6em; border-radius:6px; flex:1; text-align:center;">💼 Cliente PE</div>
+      </div>
+      <span style="color:#999; min-width:100px; font-size:0.85em;">criticos</span>
+    </div>
+    <div style="text-align:center; color:#2DD4BF; font-size:0.85em; margin:0.2em 0;">CHECKPOINT: Aceptar/rechazar cada critica CON razon</div>
+    <!-- Phase 4 -->
+    <div style="display:flex; align-items:center; gap:0.8em; margin:0.4em 0;">
+      <span style="color:#999; font-family:'JetBrains Mono',monospace; min-width:50px;">F4</span>
+      <div style="background:rgba(255,255,255,0.1); padding:0.4em 1em; border-radius:6px; flex:1;">📝 Senior Analyst → <strong>memo-final.md</strong></div>
+      <span style="color:#2DD4BF; min-width:100px;">→ 2 paginas</span>
+    </div>
+  </div>
+  <p style="color:#666; font-size:0.55em; margin-top:0.5em;">8 agentes · 4 checkpoints · 60 minutos · Tu juicio en cada paso</p>
 </section>
 
 <!-- SLIDE 31b: El Repo -->
 <section>
-  <h2>Todo está en GitHub</h2>
+  <h2>Todo esta en GitHub</h2>
   <br>
   <div style="background:#f5f5f5; padding:1.2em; border-radius:8px; max-width:650px; margin:0 auto;">
     <p style="font-family:'JetBrains Mono',monospace; font-size:0.75em; margin:0;">github.com/scarlettdetekelala/<br><strong>seminario-multi-agentes</strong></p>
   </div>
   <br>
-  <div style="text-align:left; max-width:600px; margin:0 auto; font-size:0.8em;">
-    <p>📁 <code>mi-contexto.md</code> — Editar con TU info</p>
-    <p>📁 <code>prompts/</code> — Los 3 prompts listos para copiar</p>
-    <p>📁 <code>ejemplo/</code> — Resultado completo de ejemplo</p>
-    <p>📁 <code>resultados/</code> — Aquí se guardan tus resultados</p>
+  <div style="text-align:left; max-width:600px; margin:0 auto; font-size:0.75em;">
+    <p>📄 <code>empresa.md</code> — Brief de Grupo Nutresa</p>
+    <p>📄 <code>mi-contexto.md</code> — Editar con TU perfil</p>
+    <p>📁 <code>prompts/fase-1/</code> — Prompt del screener</p>
+    <p>📁 <code>prompts/fase-2/</code> — 3 prompts de analistas</p>
+    <p>📁 <code>prompts/fase-3/</code> — 3 prompts de criticos</p>
+    <p>📁 <code>prompts/fase-4/</code> — Prompt del integrador</p>
   </div>
 </section>
 
 <!-- SLIDE 31c: Paso a Paso -->
 <section>
   <h2 style="font-size:1.3em; margin-bottom:0.2em;">Paso a Paso</h2>
-  <div style="text-align:left; max-width:650px; margin:0 auto; font-size:0.7em;">
-    <p style="margin:0.3em 0;"><strong>1.</strong> Abrir Antigravity → <strong>Agent Manager</strong> (no Editor)</p>
-    <p style="margin:0.3em 0;"><strong>2.</strong> Agregar 3 workspaces (uno por agente)</p>
-    <p style="margin:0.3em 0;"><strong>3.</strong> Copiar <code>mi-contexto.md</code> a cada workspace</p>
-    <p style="margin:0.3em 0;"><strong>4.</strong> Lanzar los 3 agentes <strong>al mismo tiempo</strong> — cada uno con su prompt</p>
-    <p style="margin:0.3em 0;"><strong>5.</strong> Monitorear en <strong>Inbox</strong> → aprobar acciones, dar feedback</p>
-    <p style="margin:0.3em 0;"><strong>6.</strong> Cuando los 3 terminen: abrir un 4° agente que <strong>combine</strong> los 3 resultados</p>
-    <p style="margin:0.3em 0;"><strong>7.</strong> Iterar: ¿falta algo? Mandar un agente de vuelta a investigar más</p>
+  <div style="text-align:left; max-width:700px; margin:0 auto; font-size:0.65em;">
+    <p style="margin:0.3em 0;"><strong>0.</strong> Abrir Antigravity → <strong>Agent Manager</strong>. Editar <code>mi-contexto.md</code></p>
+    <p style="margin:0.3em 0;"><strong>1.</strong> <strong>Fase 1:</strong> Lanzar screener → leer screening.md</p>
+    <p style="margin:0.3em 0; padding-left:1.5em; color:#2DD4BF;">CHECKPOINT: escribir <code>notas-screening.md</code> (tu angulo + preguntas)</p>
+    <p style="margin:0.3em 0;"><strong>2.</strong> <strong>Fase 2:</strong> Lanzar 3 analistas <strong>en paralelo</strong> → leer los 3 reportes</p>
+    <p style="margin:0.3em 0; padding-left:1.5em; color:#2DD4BF;">CHECKPOINT: escribir <code>tesis.md</code> (TU recomendacion: comprar/esperar/evitar)</p>
+    <p style="margin:0.3em 0;"><strong>3.</strong> <strong>Fase 3:</strong> Lanzar 3 criticos <strong>en paralelo</strong> → leer las 3 tarjetas</p>
+    <p style="margin:0.3em 0; padding-left:1.5em; color:#2DD4BF;">CHECKPOINT: escribir <code>notas-comite.md</code> (aceptar/rechazar cada critica)</p>
+    <p style="margin:0.3em 0;"><strong>4.</strong> <strong>Fase 4:</strong> Lanzar integrador → <code>memo-final.md</code></p>
   </div>
-  <p class="small" style="color:#999;">💡 La clave es el paso 5: ustedes son el orquestador. Revisan, redirigen, combinan.</p>
+  <p class="small" style="color:#999;">La clave son los CHECKPOINTS: tu juicio en cada paso cambia el resultado final.</p>
 </section>
 
 <!-- SLIDE 32: Rules -->
 <section data-background="#1A1C20">
   <h2 style="color:#fff; margin-bottom:0.3em;">Reglas</h2>
-  <div style="text-align:left; max-width:600px; margin:0 auto; font-size:0.8em; color:#E5E5E5;">
-    <p style="margin:0.4em 0;">→ Mínimo <strong style="color:#2DD4BF;">3 agentes corriendo en paralelo</strong> (no en secuencia)</p>
-    <p style="margin:0.4em 0;">→ Cada agente en su <strong style="color:#2DD4BF;">propio workspace</strong></p>
-    <p style="margin:0.4em 0;">→ Documentar: qué le pidieron a cada uno y <strong style="color:#2DD4BF;">cómo combinaron los resultados</strong></p>
-    <p style="margin:0.4em 0;">→ Entregable: plan de estudio integrado (no 3 archivos sueltos)</p>
-    <p style="margin:0.4em 0;">→ <strong style="color:#2DD4BF;">Bonus:</strong> Medir su Δ — ¿cuánto mejor fue el resultado orquestado vs. un solo prompt?</p>
+  <div style="text-align:left; max-width:650px; margin:0 auto; font-size:0.75em; color:#E5E5E5;">
+    <p style="margin:0.4em 0;">→ Minimo <strong style="color:#2DD4BF;">3 agentes en paralelo</strong> (en Fase 2 O Fase 3)</p>
+    <p style="margin:0.4em 0;">→ <strong style="color:#2DD4BF;">DEBES escribir tu tesis</strong> ANTES de lanzar los criticos</p>
+    <p style="margin:0.4em 0;">→ <strong style="color:#2DD4BF;">DEBES aceptar/rechazar</strong> cada critica CON razon</p>
+    <p style="margin:0.4em 0;">→ Entregable: <code style="color:#2DD4BF;">memo-final.md</code> (no archivos sueltos)</p>
+    <p style="margin:0.4em 0;">→ <strong style="color:#2DD4BF;">Bonus:</strong> Medir Delta — mismo pipeline, diferente analista = diferente recomendacion?</p>
   </div>
   <p style="color:#666; font-size:1.3em; margin-top:0.5em;">⏱ 60 minutos</p>
 </section>
@@ -530,13 +594,14 @@
 <section>
   <h2 style="font-size:1.4em; margin-bottom:0.2em;">Presentaciones</h2>
   <p style="font-size:0.75em; margin:0;">3-4 minutos por equipo</p>
-  <div style="text-align:left; max-width:550px; margin:0.5em auto 0; font-size:0.75em;">
+  <div style="text-align:left; max-width:600px; margin:0.5em auto 0; font-size:0.75em;">
     <p style="margin:0.3em 0;"><strong>Muestren:</strong></p>
-    <p style="margin:0.2em 0;">→ Qué le pidieron a cada agente</p>
-    <p style="margin:0.2em 0;">→ Cómo orquestaron el flujo</p>
-    <p style="margin:0.2em 0;">→ El resultado</p>
-    <p style="margin:0.5em 0 0.3em;"><strong>Los demás evalúan:</strong></p>
-    <p style="margin:0.2em 0;">→ ¿Fue mejor que hacerlo solo con un chat?</p>
+    <p style="margin:0.2em 0;">→ Su <strong>tesis</strong>: comprar, esperar, o evitar?</p>
+    <p style="margin:0.2em 0;">→ Que critica <strong>aceptaron</strong> y cual <strong>rechazaron</strong> (y por que)</p>
+    <p style="margin:0.2em 0;">→ Su memo final</p>
+    <p style="margin:0.5em 0 0.3em;"><strong>Los demas evaluan:</strong></p>
+    <p style="margin:0.2em 0;">→ Llegaron a la misma recomendacion que otro equipo?</p>
+    <p style="margin:0.2em 0;">→ Si no — ESO es el Delta.</p>
   </div>
 </section>
 
