@@ -204,24 +204,23 @@
 
 <!-- SLIDE 10: Infinite interns -->
 <section>
-  <h2>Pasantes infinitos</h2>
-  <p style="font-size:1.1em;">Ya no usas <strong>una</strong> herramienta.<br>Diriges un <strong>equipo</strong> de agentes.</p>
-  <br>
-  <div style="display:flex; justify-content:center; gap:2em; font-size:0.8em;">
-    <div style="text-align:center;">
-      <p style="font-size:2em;">🔍</p>
-      <p><strong>Agente 1</strong><br>Investigador</p>
+  <h2 style="font-size:1.5em;">Pasantes infinitos</h2>
+  <p style="font-size:0.9em;">Ya no usas <strong>una</strong> herramienta.<br>Diriges un <strong>equipo</strong> de agentes — cada uno en su escritorio.</p>
+  <div style="display:flex; justify-content:center; gap:1.5em; font-size:0.7em; margin-top:0.5em;">
+    <div style="text-align:center; background:#f5f5f5; padding:0.6em 1em; border-radius:8px;">
+      <p style="font-size:2em; margin:0;">🔍</p>
+      <p style="margin:0.2em 0;"><strong>Workspace 1</strong><br>Investigador</p>
     </div>
-    <div style="text-align:center;">
-      <p style="font-size:2em;">📝</p>
-      <p><strong>Agente 2</strong><br>Escritor</p>
+    <div style="text-align:center; background:#f5f5f5; padding:0.6em 1em; border-radius:8px;">
+      <p style="font-size:2em; margin:0;">📊</p>
+      <p style="margin:0.2em 0;"><strong>Workspace 2</strong><br>Analista</p>
     </div>
-    <div style="text-align:center;">
-      <p style="font-size:2em;">📊</p>
-      <p><strong>Agente 3</strong><br>Presentador</p>
+    <div style="text-align:center; background:#f5f5f5; padding:0.6em 1em; border-radius:8px;">
+      <p style="font-size:2em; margin:0;">📋</p>
+      <p style="margin:0.2em 0;"><strong>Workspace 3</strong><br>Diseñador</p>
     </div>
   </div>
-  <p class="fragment" style="margin-top:1em;">Y tú eres el <strong>director de orquesta</strong>.</p>
+  <p class="fragment" style="margin-top:0.5em; font-size:0.9em;">Corren <strong>en paralelo</strong>. Tú revisas en el Inbox.<br>Eres el <strong>director de orquesta</strong>.</p>
 </section>
 
 <!-- SLIDE 11: Antigravity Agent Manager -->
@@ -322,19 +321,21 @@
 <!-- SLIDE 19: Delta example -->
 <section>
   <h3 style="font-size:1em; margin-bottom:0.1em;">Misma herramienta. Diferente Delta.</h3>
-  <div style="text-align:left; max-width:550px; margin:0 auto; font-size:0.6em;">
-    <div style="padding:0.5em; background:#f5f5f5; border-radius:8px; margin-bottom:0.4em;">
-      <strong>Sin dirección (Δ ≈ 1):</strong>
-      <span style="font-family:'JetBrains Mono',monospace; font-size:0.85em;"> "Optimiza la distribución de mi planta"</span><br>
-      → Genérico. No conoce tu planta.
+  <div style="text-align:left; max-width:580px; margin:0 auto; font-size:0.55em;">
+    <div style="padding:0.5em; background:#f5f5f5; border-radius:8px; margin-bottom:0.3em;">
+      <strong>Δ ≈ 1 — Un solo prompt:</strong><br>
+      <span style="font-family:'JetBrains Mono',monospace; font-size:0.85em;">"Hazme un plan de estudio para ser mejor ingeniero industrial"</span><br>
+      → Genérico. Consejos de manual. No te conoce.
     </div>
     <div style="padding:0.5em; background:#1A1C20; color:#fff; border-radius:8px;">
-      <strong>Con dirección (Δ > 2):</strong>
-      <span style="font-family:'JetBrains Mono',monospace; font-size:0.8em;"> "Planta 800m², 3 líneas. Empaque = cuello de botella (12 vs 8 min). Redistribución minimizando recorrido. Refrigeración no se mueve."</span><br>
-      → Accionable. Con tu contexto real.
+      <strong>Δ > 2 — Tres agentes orquestados:</strong><br>
+      <span style="font-size:0.85em;">🔍 Agente 1 investiga mercado laboral para tu perfil específico<br>
+      📊 Agente 2 analiza tus fortalezas y gaps vs. lo que pide el mercado<br>
+      📋 Agente 3 arma plan semestre a semestre con cursos reales<br>
+      🧠 <strong>Tú</strong> revisas, corriges, combinas → plan accionable y personalizado</span>
     </div>
   </div>
-  <p class="fragment" style="font-weight:700; margin-top:0.5em; font-size:0.9em;">La bifurcación ya empezó. No hay punto medio estable.</p>
+  <p class="fragment" style="font-weight:700; margin-top:0.4em; font-size:0.85em;">La diferencia no es la IA. Es cómo la diriges.</p>
 </section>
 
 <!-- SLIDE 20: Demo section -->
@@ -459,22 +460,20 @@
 
 <!-- SLIDE 31: El Reto -->
 <section>
-  <h2>El Reto</h2>
-  <p>Vamos a crear un <strong>plan de estudio personalizado</strong><br>usando 3 agentes que trabajan en equipo.</p>
-  <br>
-  <div style="text-align:left; max-width:700px; margin:0 auto; font-size:0.8em;">
-    <div style="padding:0.6em 1em; background:#f5f5f5; border-radius:6px; margin:0.4em 0;">
-      🔍 <strong>Agente 1 — Investigador:</strong> Analiza tu situación + mercado laboral
+  <h2 style="font-size:1.5em; margin-bottom:0.2em;">El Reto</h2>
+  <p style="font-size:0.8em;">Crear un <strong>plan de estudio personalizado</strong> usando 3 agentes<br>trabajando <strong>en paralelo</strong>, cada uno en su propio workspace.</p>
+  <div style="text-align:left; max-width:700px; margin:0.3em auto; font-size:0.7em;">
+    <div style="padding:0.5em 1em; background:#f5f5f5; border-radius:6px; margin:0.3em 0;">
+      🔍 <strong>Workspace 1 — Investigador:</strong> Investiga mercado laboral + tendencias para tu perfil. Genera <code>investigacion.md</code>
     </div>
-    <div style="padding:0.6em 1em; background:#f5f5f5; border-radius:6px; margin:0.4em 0;">
-      📋 <strong>Agente 2 — Estratega:</strong> Diseña el plan semestre por semestre
+    <div style="padding:0.5em 1em; background:#f5f5f5; border-radius:6px; margin:0.3em 0;">
+      📊 <strong>Workspace 2 — Analista:</strong> Analiza tus fortalezas y gaps vs. el mercado. Genera <code>analisis-gaps.md</code>
     </div>
-    <div style="padding:0.6em 1em; background:#f5f5f5; border-radius:6px; margin:0.4em 0;">
-      📄 <strong>Agente 3 — Recursos:</strong> Encuentra cursos, libros y crea calendario
+    <div style="padding:0.5em 1em; background:#f5f5f5; border-radius:6px; margin:0.3em 0;">
+      📋 <strong>Workspace 3 — Diseñador:</strong> Arma plan de estudio semestre por semestre con recursos. Genera <code>plan-estudio.md</code>
     </div>
   </div>
-  <br>
-  <p class="small">Cada agente alimenta al siguiente → <strong>pipeline de agentes</strong></p>
+  <p class="small">3 agentes en paralelo → revisar en Inbox → iterar → combinar resultados</p>
 </section>
 
 <!-- SLIDE 31b: El Repo -->
@@ -495,32 +494,30 @@
 
 <!-- SLIDE 31c: Paso a Paso -->
 <section>
-  <h2>Paso a Paso</h2>
-  <br>
-  <div style="text-align:left; max-width:650px; margin:0 auto; font-size:0.85em;">
-    <p><strong>1.</strong> Abrir Antigravity → File → Open Folder → <em>la carpeta del repo</em></p>
-    <p><strong>2.</strong> Editar <code>mi-contexto.md</code> con tu info real</p>
-    <p><strong>3.</strong> Abrir chat (<code>Cmd+L</code>) → pegar prompt del <strong>Agente 1</strong></p>
-    <p><strong>4.</strong> Revisar resultado → pegar prompt del <strong>Agente 2</strong></p>
-    <p><strong>5.</strong> Revisar resultado → pegar prompt del <strong>Agente 3</strong></p>
-    <p><strong>6.</strong> ¡Tienes un plan de estudio personalizado!</p>
+  <h2 style="font-size:1.3em; margin-bottom:0.2em;">Paso a Paso</h2>
+  <div style="text-align:left; max-width:650px; margin:0 auto; font-size:0.7em;">
+    <p style="margin:0.3em 0;"><strong>1.</strong> Abrir Antigravity → <strong>Agent Manager</strong> (no Editor)</p>
+    <p style="margin:0.3em 0;"><strong>2.</strong> Agregar 3 workspaces (uno por agente)</p>
+    <p style="margin:0.3em 0;"><strong>3.</strong> Copiar <code>mi-contexto.md</code> a cada workspace</p>
+    <p style="margin:0.3em 0;"><strong>4.</strong> Lanzar los 3 agentes <strong>al mismo tiempo</strong> — cada uno con su prompt</p>
+    <p style="margin:0.3em 0;"><strong>5.</strong> Monitorear en <strong>Inbox</strong> → aprobar acciones, dar feedback</p>
+    <p style="margin:0.3em 0;"><strong>6.</strong> Cuando los 3 terminen: abrir un 4° agente que <strong>combine</strong> los 3 resultados</p>
+    <p style="margin:0.3em 0;"><strong>7.</strong> Iterar: ¿falta algo? Mandar un agente de vuelta a investigar más</p>
   </div>
-  <br>
-  <p class="small" style="color:#999;">💡 Pueden modificar los prompts. Iterar es parte del ejercicio.</p>
+  <p class="small" style="color:#999;">💡 La clave es el paso 5: ustedes son el orquestador. Revisan, redirigen, combinan.</p>
 </section>
 
 <!-- SLIDE 32: Rules -->
 <section data-background="#1A1C20">
-  <h2 style="color:#fff;">Reglas</h2>
-  <br>
-  <div style="text-align:left; max-width:600px; margin:0 auto; font-size:0.9em; color:#E5E5E5;">
-    <p>→ Mínimo <strong style="color:#2DD4BF;">2 agentes en paralelo</strong></p>
-    <p>→ Documentar: qué le pidieron a cada agente y <strong style="color:#2DD4BF;">por qué lo dividieron así</strong></p>
-    <p>→ Entregable concreto: slides, documento, o plan</p>
-    <p>→ <strong style="color:#2DD4BF;">Bonus:</strong> Medir su propio Δ</p>
+  <h2 style="color:#fff; margin-bottom:0.3em;">Reglas</h2>
+  <div style="text-align:left; max-width:600px; margin:0 auto; font-size:0.8em; color:#E5E5E5;">
+    <p style="margin:0.4em 0;">→ Mínimo <strong style="color:#2DD4BF;">3 agentes corriendo en paralelo</strong> (no en secuencia)</p>
+    <p style="margin:0.4em 0;">→ Cada agente en su <strong style="color:#2DD4BF;">propio workspace</strong></p>
+    <p style="margin:0.4em 0;">→ Documentar: qué le pidieron a cada uno y <strong style="color:#2DD4BF;">cómo combinaron los resultados</strong></p>
+    <p style="margin:0.4em 0;">→ Entregable: plan de estudio integrado (no 3 archivos sueltos)</p>
+    <p style="margin:0.4em 0;">→ <strong style="color:#2DD4BF;">Bonus:</strong> Medir su Δ — ¿cuánto mejor fue el resultado orquestado vs. un solo prompt?</p>
   </div>
-  <br>
-  <p style="color:#666; font-size:1.5em;">⏱ 60 minutos</p>
+  <p style="color:#666; font-size:1.3em; margin-top:0.5em;">⏱ 60 minutos</p>
 </section>
 
 <!-- SLIDE 33: Timer placeholder -->
